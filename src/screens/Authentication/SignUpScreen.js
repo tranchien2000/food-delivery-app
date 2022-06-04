@@ -5,17 +5,21 @@ import {
   View,
   ScrollView,
   TextInput,
+  TouchableOpacity,
   Alert,
+  Image,
 } from 'react-native';
 import {Formik} from 'formik';
 import {Icon, Button} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
-import {COLORS} from '../../constants';
+import {COLORS, SIZES, FONTS, icons} from '../../constants';
 
 export default function SignUpScreen({navigation}) {
   return (
-    <View>
-      <Text>Sign Up Screen</Text>
+    <View style={styles.container}>
+      <View style={styles.view1}>
+        <TextInput style={styles.text1} placeholder="Email" />
+      </View>
     </View>
   );
 }

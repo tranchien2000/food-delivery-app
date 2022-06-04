@@ -6,13 +6,15 @@ import {
   Dimensions,
   TextInput,
   Alert,
+  Image,
 } from 'react-native';
 
-import {SocialIcon, Icon, Button} from 'react-native-elements';
+import {SocialIcon, Button} from 'react-native-elements';
 
 import * as Animatable from 'react-native-animatable';
 import {Formik} from 'formik';
-import {COLORS} from '../../constants';
+import {COLORS, FONTS, icons} from '../../constants';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function SignInScreen({navigation}) {
   const [textInput2Fossued, setTextInput2Fossued] = useState(false);
@@ -39,15 +41,16 @@ export default function SignInScreen({navigation}) {
 
         <View style={styles.TextInput2}>
           <Animatable.View>
-            <Icon
-              name="lock"
+            {/* <Icon
+              name="lock-closed-outline"
               iconStyle={{color: COLORS.grey3}}
-              type="material"
+              type=""
               style={{}}
-            />
+            /> */}
+            <Image source={icons.lock} style={{marginRight: 10}} />
           </Animatable.View>
           <TextInput
-            style={{width: '80%'}}
+            style={{width: '80%', fontWeight: 'bold'}}
             placeholder="Password"
             onFocus={() => {
               setTextInput2Fossued(false);
@@ -55,14 +58,16 @@ export default function SignInScreen({navigation}) {
             onBlur={() => {
               setTextInput2Fossued(true);
             }}
+            secureTextEntry={true}
           />
           <Animatable.View>
-            <Icon
+            {/* <Icon
               name="visibility-off"
               iconStyle={{color: COLORS.grey3}}
               type="material"
               style={{marginRight: 10}}
-            />
+            /> */}
+            <Image source={icons.visibility_off} style={{marginRight: 10}} />
           </Animatable.View>
         </View>
       </View>
@@ -115,8 +120,8 @@ export default function SignInScreen({navigation}) {
       <View style={{alignItems: 'flex-end', marginHorizontal: 20}}>
         <Button
           title="Đăng kí"
-          buttonStyle={styles.createButton}
-          titleStyle={styles.createButtonTitle}
+          buttonStyle={styles.Button}
+          titleStyle={styles.ButtonTitle}
           onPress={() => {
             navigation.navigate('SignUpScreen');
           }}
@@ -184,7 +189,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
 
-  createButton: {
+  Button: {
     backgroundColor: 'white',
     alignContent: 'center',
     justifyContent: 'center',
@@ -195,7 +200,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
 
-  createButtonTitle: {
+  ButtonTitle: {
     color: '#ff8c52',
     fontSize: 16,
     fontWeight: 'bold',
