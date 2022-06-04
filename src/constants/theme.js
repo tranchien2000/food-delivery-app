@@ -12,7 +12,7 @@ export const COLORS = {
 
   categoriesColor: '#F5F5F6',
   orderColor: '#FCF4D9',
-  headerColor: '#FF7A5A',
+  headerColor: '#ff8c52',
   locationColor: '#F8F8F9',
   transparent: 'transparent',
   darkGray: '#898C95',
@@ -53,6 +53,31 @@ export const SIZES = {
   // app dimension
   width,
   height,
+};
+
+export const parameters = {
+  headerHeight: 40,
+
+  styledButton: {
+    backgroundColor: '#ff8c52',
+    alignContent: 'center',
+    justifyContent: 'center',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#ff8c52',
+    height: 50,
+    paddingHorizontal: 20,
+    width: '100%',
+  },
+
+  buttonTitle: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: -3,
+  },
 };
 
 export const FONTS = {

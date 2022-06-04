@@ -13,33 +13,163 @@ import {Formik} from 'formik';
 import {Icon, Button} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 import {COLORS, SIZES, FONTS, icons} from '../../constants';
+import Header from './Header';
+
+const initialValues = {
+  phone_number: '',
+  name: '',
+  password: '',
+  email: '',
+  username: '',
+};
 
 export default function SignUpScreen({navigation}) {
+  const [passwordFocussed, setPassordFocussed] = useState(false);
+  const [passwordBlured, setPasswordBlured] = useState(false);
+
+  async function signUp(values) {
+    const {email, password} = values;
+
+    try {
+      await auth().createUserWithEmailAndPassword(email, password);
+      console.log('USER ACCOUNT CREATED');
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        Alert.alert('Địa chỉ email đã được sử dụng');
+      }
+      if (error.code === 'auth/invalid-email') {
+        Alert.alert('Địa chỉ email không hợp lệ');
+      } else {
+        Alert.alert(error.code);
+      }
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <View style={styles.view1}>
-        <TextInput style={styles.text1} placeholder="Email" />
-      </View>
+      <ScrollView keyboardShouldPersistTaps="always">
+        <Header type="" title="ĐĂNG KÍ" navigation={navigation} />
+        <View style={styles.view1}>
+          <Text style={styles.text1}>ĐĂNG KÍ</Text>
+        </View>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={values => {
+            signUp(values);
+          }}>
+          {props => (
+            <View style={styles.view2}>
+              <View style={styles.view6}>
+                <TextInput
+                  placeholder="Số điện thoại"
+                  style={styles.input1}
+                  keyboardType="number-pad"
+                  autoFocus={true}
+                  onChangeText={props.handleChange('phone_number')}
+                  value={props.values.phone_number}
+                />
+              </View>
+              <View style={styles.view6}>
+                <TextInput
+                  placeholder="Tên"
+                  style={styles.input1}
+                  autoFocus={false}
+                  onChangeText={props.handleChange('name')}
+                  value={props.values.name}
+                />
+              </View>
+
+              <View style={styles.view10}>
+                <View style={styles.view11}>
+                  <TextInput
+                    placeholder="Email"
+                    style={styles.input4}
+                    autoFocus={false}
+                    onChangeText={props.handleChange('email')}
+                    value={props.values.email}
+                  />
+                </View>
+              </View>
+
+              <View style={styles.view14}>
+                <Animatable.View
+                  animation={passwordFocussed ? 'fadeInRight' : 'fadeInLeft'}
+                  duration={400}>
+                  <Image source={icons.lock} style={{marginRight: 10}} />
+                </Animatable.View>
+                <TextInput
+                  placeholder="Password"
+                  style={{flex: 1}}
+                  autoFocus={false}
+                  onChangeText={props.handleChange('password')}
+                  value={props.values.password}
+                  onFocus={() => {
+                    setPassordFocussed(true);
+                  }}
+                  onBlur={() => {
+                    setPasswordBlured(true);
+                  }}
+                  secureTextEntry={true}
+                />
+                <Animatable.View
+                  animation={passwordBlured ? 'fadeInLeft' : 'fadeInRight'}
+                  duration={400}>
+                  <Image
+                    source={icons.visibility_off}
+                    style={{marginRight: 10}}
+                  />
+                </Animatable.View>
+              </View>
+
+              <View style={styles.view17}>
+                <Button
+                  title="Tạo tài khoản mới "
+                  buttonStyle={styles.button1}
+                  titleStyle={styles.title1}
+                  onPress={props.handleSubmit}
+                />
+              </View>
+            </View>
+          )}
+        </Formik>
+        <View style={styles.view18}>
+          <Text style={styles.text5}>OR</Text>
+        </View>
+        <View style={styles.view19}>
+          <View>
+            <Text style={FONTS.body3}>Đã có tài khoản?</Text>
+          </View>
+          <View style={styles.view21}>
+            <Button
+              title="Đăng nhập"
+              buttonStyle={styles.button2}
+              titleStyle={styles.title2}
+              onPress={() => {
+                navigation.navigate('SignInScreen');
+              }}
+            />
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: 'white'},
+  container: {flex: 1, backgroundColor: COLORS.orderColor},
 
   view1: {
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     marginTop: 10,
-    marginBottom: 10,
     paddingHorizontal: 15,
   },
 
-  text1: {fontSize: 22, color: COLORS.buttons, fontWeight: 'bold'},
+  text1: {fontSize: 30, color: COLORS.buttons, fontWeight: 'bold'},
 
   view2: {
     justifyContent: 'flex-start',
-    backgroundColor: 'white',
+    backgroundColor: COLORS.orderColor,
     paddingHorizontal: 15,
   },
 
@@ -105,9 +235,9 @@ const styles = StyleSheet.create({
     marginLeft: 2,
   },
 
-  view11: {marginLeft: 30, maxWidth: '65%'},
+  view11: {maxWidth: '65%'},
 
-  input4: {fontSize: 16, marginLeft: -20, marginBottom: -10},
+  input4: {fontSize: 16},
 
   view13: {flexDirection: 'row', height: 40},
 
@@ -163,26 +293,26 @@ const styles = StyleSheet.create({
 
   text5: {fontSize: 15, fontWeight: 'bold'},
 
-  view19: {backgroundColor: 'white', paddingHorizontal: 15},
+  view19: {backgroundColor: COLORS.orderColor, paddingHorizontal: 15},
 
   view20: {marginTop: 5},
 
   view21: {marginTop: 5, alignItems: 'flex-end'},
 
   button2: {
-    backgroundColor: COLORS.background3,
+    backgroundColor: 'white',
     alignContent: 'center',
     justifyContent: 'center',
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: COLORS.background2,
+    borderColor: COLORS.headerColor,
     height: 40,
     paddingHorizontal: 20,
     // width:'100%'
   },
 
   title2: {
-    color: COLORS.buttons,
+    color: COLORS.headerColor,
     fontSize: 16,
     fontWeight: 'bold',
     alignItems: 'center',

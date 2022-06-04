@@ -16,7 +16,9 @@ export const RenderMainCategories = ({
           padding: SIZES.padding,
           paddingBottom: SIZES.padding * 2,
           backgroundColor:
-            selectedCategory?.id === item.id ? COLORS.primary : COLORS.white,
+            selectedCategory?.id === item.id
+              ? COLORS.headerColor
+              : COLORS.white,
           borderRadius: SIZES.radius,
           alignItems: 'center',
           justifyContent: 'center',

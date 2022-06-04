@@ -24,8 +24,8 @@ export const star = require('../assets/icons/star.png');
 export const sushi = require('../assets/icons/sushi.png');
 export const user = require('../assets/icons/user.png');
 export const filter = require('../assets/icons/filter.png');
-export const lock = require('../assets/icons/lock.png');
-export const visibility_off = require('../assets/icons/visibility_off.png');
+export const lock = require('../assets/icons/icons8-lock-24.png');
+export const visibility_off = require('../assets/icons/icons8-invisible-24.png');
 
 export default {
   back,
