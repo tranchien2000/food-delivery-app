@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import {Restaurant, OrderDelivery, Home, AuthStack} from './src/screens';
 import Tabs from './src/screens/tabs';
-// import AuthStack from './src/screens/Authentication/authStack';
+// import {rootNavigation} from './src/screens/Authentication/rootNavigation';
 
 const Stack = createStackNavigator();
 

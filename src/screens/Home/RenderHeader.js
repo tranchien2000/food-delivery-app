@@ -1,7 +1,20 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {useState, useRef} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Modal,
+  TextInput,
+} from 'react-native';
+import {Icon} from 'react-native-elements';
+import * as Animatable from 'react-native-animatable';
 import {COLORS, icons, FONTS, SIZES} from '../../constants';
+import {restaurantData} from '../../Data/data';
+import SearchModal from '../Search/SearchHeader';
 
 export const RenderHeader = ({currentLocation, setCurrentLocation}) => {
   return (
@@ -41,7 +54,22 @@ export const RenderHeader = ({currentLocation, setCurrentLocation}) => {
             justifyContent: 'center',
             borderRadius: SIZES.radius,
           }}>
-          <Text style={{...FONTS.h4}}>{currentLocation.streetName}</Text>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              setModalVisible(true);
+            }}>
+            <View style={styles.SearchArea}>
+              <Icon
+                name="search"
+                style={styles.searchIcon}
+                type="material"
+                iconStyle={{marginLeft: 5}}
+                size={32}
+              />
+              <Text style={{fontSize: 15}}>Bạn muốn tìm gì?</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <SearchModal />
         </View>
       </View>
       <TouchableOpacity
@@ -61,3 +89,18 @@ export const RenderHeader = ({currentLocation, setCurrentLocation}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  SearchArea: {
+    // marginTop: 10,
+    width: '100%',
+    height: 50,
+    backgroundColor: COLORS.headerColor,
+    borderRadius: SIZES.radius,
+    borderColor: COLORS.grey4,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  searchIcon: {fontSize: 24, padding: 5, color: COLORS.grey2},
+});

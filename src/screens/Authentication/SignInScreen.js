@@ -15,11 +15,29 @@ import * as Animatable from 'react-native-animatable';
 import {Formik} from 'formik';
 import {COLORS, FONTS, icons} from '../../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {SignInContext} from './authContext';
 
 export default function SignInScreen({navigation}) {
+  // const {dispatchSignedIn} = useContext(SignInContext);
+
   const [textInput2Fossued, setTextInput2Fossued] = useState(false);
   const textInpput1 = useRef(1);
   const textInput2 = useRef(2);
+
+  async function signIn(data) {
+    try {
+      const {password, email} = data;
+      const user = await auth().signInWithEmailAndPassword(email, password);
+      if (user) {
+        dispatchSignedIn({
+          type: 'UPDATE_SIGN_IN',
+          payload: {userToken: 'signed-in'},
+        });
+      }
+    } catch (error) {
+      Alert.alert(error.name, error.message);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -29,59 +47,63 @@ export default function SignInScreen({navigation}) {
           ĐĂNG NHẬP
         </Text>
       </View>
+      <Formik
+        initialValues={{email: '', password: ''}}
+        onSubmit={values => {
+          signIn(values);
+        }}>
+        {props => (
+          <View>
+            <View style={{marginTop: 20}}>
+              <View>
+                <TextInput
+                  style={styles.TextInput1}
+                  placeholder="Email"
+                  ref={textInpput1}
+                  onChangeText={props.handleChange('email')}
+                  value={props.values.email}
+                />
+              </View>
 
-      <View style={{marginTop: 20}}>
-        <View>
-          <TextInput
-            style={styles.TextInput1}
-            placeholder="Email"
-            ref={textInpput1}
-          />
-        </View>
+              <View style={styles.TextInput2}>
+                <Animatable.View>
+                  <Image source={icons.lock} style={{marginRight: 10}} />
+                </Animatable.View>
+                <TextInput
+                  style={{width: '80%', fontWeight: 'bold'}}
+                  placeholder="Password"
+                  onFocus={() => {
+                    setTextInput2Fossued(false);
+                  }}
+                  onBlur={() => {
+                    setTextInput2Fossued(true);
+                  }}
+                  onChangeText={props.handleChange('password')}
+                  value={props.values.password}
+                  secureTextEntry={true}
+                />
+                <Animatable.View>
+                  <Image
+                    source={icons.visibility_off}
+                    style={{marginRight: 10}}
+                  />
+                </Animatable.View>
+              </View>
+            </View>
 
-        <View style={styles.TextInput2}>
-          <Animatable.View>
-            {/* <Icon
-              name="lock-closed-outline"
-              iconStyle={{color: COLORS.grey3}}
-              type=""
-              style={{}}
-            /> */}
-            <Image source={icons.lock} style={{marginRight: 10}} />
-          </Animatable.View>
-          <TextInput
-            style={{width: '80%', fontWeight: 'bold'}}
-            placeholder="Password"
-            onFocus={() => {
-              setTextInput2Fossued(false);
-            }}
-            onBlur={() => {
-              setTextInput2Fossued(true);
-            }}
-            secureTextEntry={true}
-          />
-          <Animatable.View>
-            {/* <Icon
-              name="visibility-off"
-              iconStyle={{color: COLORS.grey3}}
-              type="material"
-              style={{marginRight: 10}}
-            /> */}
-            <Image source={icons.visibility_off} style={{marginRight: 10}} />
-          </Animatable.View>
-        </View>
-      </View>
-
-      <View style={{marginHorizontal: 20, marginVertical: 20}}>
-        <Button
-          title="ĐĂNG NHẬP"
-          buttonStyle={styles.styledButton}
-          titleStyle={styles.buttonTitle}
-          onPress={() => {
-            navigation.navigate('Home');
-          }}
-        />
-      </View>
+            <View style={{marginHorizontal: 20, marginVertical: 20}}>
+              <Button
+                title="ĐĂNG NHẬP"
+                buttonStyle={styles.styledButton}
+                titleStyle={styles.buttonTitle}
+                onPress={() => {
+                  navigation.navigate('Home');
+                }}
+              />
+            </View>
+          </View>
+        )}
+      </Formik>
 
       <View style={{alignItems: 'center'}}>
         <Text style={{...styles.text1, textDecorationLine: 'underline'}}>
@@ -92,7 +114,7 @@ export default function SignInScreen({navigation}) {
       <View style={{alignItems: 'center', marginTop: 10, marginBottom: 10}}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Đăng nhập bằng</Text>
       </View>
-
+      {/* 
       <View style={{marginHorizontal: 10, marginTop: 5}}>
         <SocialIcon
           title="Đăng nhập bằng Facebook"
@@ -111,7 +133,7 @@ export default function SignInScreen({navigation}) {
           style={styles.SocialIcon}
           onPress={() => {}}
         />
-      </View>
+      </View> */}
 
       <View style={{marginTop: 10, marginLeft: 20}}>
         <Text style={{...styles.text1}}>Đăng nhập lần đầu</Text>
