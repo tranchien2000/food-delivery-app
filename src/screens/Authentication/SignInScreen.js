@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   },
 
   text1: {
-    color: COLORS.grey3,
+    color: COLORS.black,
     fontSize: 16,
   },
 

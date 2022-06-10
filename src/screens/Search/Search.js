@@ -1,12 +1,13 @@
 import React from 'react';
 import {View, Image, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {COLORS} from '../../constants';
-import SearchModal from './SearchModal';
+import SearchHeader from './SearchHeader';
 
 const Search = () => {
   return (
     <View style={styles.container}>
-      <SearchModal />
+      <Text>Heillo</Text>
+      <SearchHeader />
     </View>
   );
 };

@@ -12,6 +12,7 @@ import Search from './Search/Search';
 import Like from './Like/Like';
 import User from './Authentication/User';
 import SignInScreen from './Authentication/SignInScreen';
+import OrderScreen from '../screens/OrderDelivery/OrderScreen';
 
 import {COLORS, icons} from '../constants';
 import AuthStack from './Authentication/authStack';
@@ -106,8 +107,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Like"
-        component={Like}
+        name="OrderScreen"
+        component={OrderScreen}
         options={{
           tabBarIcon: ({focused}) => (
             <Image

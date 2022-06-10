@@ -1,9 +1,8 @@
 export const back = require('../assets/icons/back.png');
-export const car = require('../assets/icons/car.png');
+export const xe_may = require('../assets/icons/xe-may.png');
 export const cutlery = require('../assets/icons/cutlery.png');
 export const donut = require('../assets/icons/donut.png');
 export const drink = require('../assets/icons/drink.png');
-export const fire = require('../assets/icons/fire.png');
 export const fries = require('../assets/icons/fries.png');
 export const hamburger = require('../assets/icons/hamburger.png');
 export const hotdog = require('../assets/icons/hotdog.png');
@@ -26,15 +25,25 @@ export const user = require('../assets/icons/user.png');
 export const filter = require('../assets/icons/filter.png');
 export const lock = require('../assets/icons/icons8-lock-24.png');
 export const visibility_off = require('../assets/icons/icons8-invisible-24.png');
+export const banh_my = require('../assets/icons/bread.png');
+export const rice = require('../assets/icons/rice.png');
+export const banh_kem = require('../assets/icons/desserts.png');
+export const do_an_vat = require('../assets/icons/snacks.png');
+// export const drink = require('../assets/icons/soft-drink.png');
+export const tra_sua = require('../assets/icons/bubble-tea.png');
 
 export default {
+  tra_sua,
+  banh_my,
+  banh_kem,
+  rice,
+  do_an_vat,
   back,
-  car,
+  xe_may,
   cutlery,
   donut,
   drink,
   filter,
-  fire,
   fries,
   hamburger,
   hotdog,

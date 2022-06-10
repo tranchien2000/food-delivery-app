@@ -14,7 +14,7 @@ import {Icon} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 import {COLORS, icons, FONTS, SIZES} from '../../constants';
 import {restaurantData} from '../../Data/data';
-import SearchModal from '../Search/SearchHeader';
+import SearchHeader from '../Search/SearchHeader';
 
 export const RenderHeader = ({currentLocation, setCurrentLocation}) => {
   return (
@@ -54,7 +54,7 @@ export const RenderHeader = ({currentLocation, setCurrentLocation}) => {
             justifyContent: 'center',
             borderRadius: SIZES.radius,
           }}>
-          <TouchableWithoutFeedback
+          {/* <TouchableWithoutFeedback
             onPress={() => {
               setModalVisible(true);
             }}>
@@ -68,8 +68,27 @@ export const RenderHeader = ({currentLocation, setCurrentLocation}) => {
               />
               <Text style={{fontSize: 15}}>Bạn muốn tìm gì?</Text>
             </View>
-          </TouchableWithoutFeedback>
-          <SearchModal />
+          </TouchableWithoutFeedback> */}
+          {/* <SearchHeader /> */}
+
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <View
+              style={{
+                width: '70%',
+                height: '100%',
+                backgroundColor: COLORS.lightGray3,
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: SIZES.radius,
+              }}>
+              <Text style={{...FONTS.h4}}>{currentLocation.streetName}</Text>
+            </View>
+          </View>
         </View>
       </View>
       <TouchableOpacity

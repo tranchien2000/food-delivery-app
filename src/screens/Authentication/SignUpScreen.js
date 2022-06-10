@@ -13,7 +13,7 @@ import {Formik} from 'formik';
 import {Icon, Button} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 import {COLORS, SIZES, FONTS, icons} from '../../constants';
-import Header from './Header';
+import HeaderSignUp from './HeaderSignUp';
 
 const initialValues = {
   phone_number: '',
@@ -48,7 +48,7 @@ export default function SignUpScreen({navigation}) {
   return (
     <View style={styles.container}>
       <ScrollView keyboardShouldPersistTaps="always">
-        <Header type="" title="ĐĂNG KÍ" navigation={navigation} />
+        <HeaderSignUp type="" title="ĐĂNG KÍ" navigation={navigation} />
         <View style={styles.view1}>
           <Text style={styles.text1}>ĐĂNG KÍ</Text>
         </View>
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
 
   view5: {marginLeft: 30, marginTop: 20},
 
-  input1: {fontSize: 16},
+  input1: {fontSize: 16, color: COLORS.black},
 
   view6: {
     flexDirection: 'row',

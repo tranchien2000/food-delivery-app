@@ -62,7 +62,7 @@ const Restaurant = ({route, navigation}) => {
   const handleBasketItemPrice = () => {
     let totalPrice = orderItem.reduce((a, b) => a + (b.total || 0), 0);
 
-    return totalPrice.toFixed(2);
+    return totalPrice.toFixed(3);
   };
 
   React.useEffect(() => {

@@ -32,7 +32,7 @@ export const RenderHeader = ({navigation, restaurant}) => {
         }}>
         <View
           style={{
-            height: 40,
+            height: 50,
             alignItems: 'center',
             justifyContent: 'center',
             paddingHorizontal: SIZES.padding * 3,
@@ -42,22 +42,6 @@ export const RenderHeader = ({navigation, restaurant}) => {
           <Text style={{...FONTS.h4}}>{restaurant?.name}</Text>
         </View>
       </View>
-
-      <TouchableOpacity
-        style={{
-          width: 50,
-          paddingRight: SIZES.padding * 2,
-          justifyContent: 'center',
-        }}>
-        <Image
-          source={icons.list}
-          resizeMode="contain"
-          style={{
-            width: 20,
-            height: 20,
-          }}
-        />
-      </TouchableOpacity>
     </View>
   );
 };

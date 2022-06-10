@@ -135,7 +135,7 @@ const RenderDeliveryInfo = ({restaurant, navigation}) => {
               justifyContent: 'center',
               borderRadius: 10,
             }}
-            onPress={() => navigation.navigate('Home')}>
+            onPress={() => navigation.navigate('OrderScreen')}>
             <Text style={{...FONTS.h4, color: COLORS.white}}>Đặt món</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -288,7 +288,7 @@ export const RenderMap = ({
         flat={true}
         rotation={angle}>
         <Image
-          source={icons.car}
+          source={icons.xe_may}
           style={{
             width: 40,
             height: 40,

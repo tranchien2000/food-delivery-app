@@ -59,6 +59,13 @@ export const RenderRestaurantList = ({
           }}>
           {item.name}
         </Text>
+        <Text
+          style={{
+            ...FONTS.body4,
+            marginBottom: SIZES.padding,
+          }}>
+          {item.address}
+        </Text>
 
         <View style={{flexDirection: 'row'}}>
           {/* star rating */}
@@ -108,20 +115,6 @@ export const RenderRestaurantList = ({
               </View>
             ))}
           </View>
-          {/* Price section */}
-          {[1, 2, 3].map(priceRating => (
-            <Text
-              key={priceRating}
-              style={{
-                ...FONTS.body3,
-                color:
-                  priceRating <= item.priceRating
-                    ? COLORS.black
-                    : COLORS.darkGray,
-              }}>
-              $
-            </Text>
-          ))}
         </View>
       </TouchableOpacity>
     );
