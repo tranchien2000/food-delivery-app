@@ -1,8 +1,8 @@
 import {icons, images} from '../constants';
 
 // Dummy data
-export const initialCurrentLocation = {
-  streetName: 'Phú Diễn, Hà Nội, Việt Nam',
+export const CurrentLocation = {
+  addressName: 'Phú Diễn, Hà Nội, Việt Nam',
   gps: {
     latitude: 21.0533134,
     longitude: 105.7632937,
@@ -55,14 +55,16 @@ export const restaurantData = [
     address: 'Kiot 2, Toà K1, Khu Đô Thị Việt Hưng, Long Biên, Hà Nội',
     categories: [1, 5],
     photo: images.sua_chua_tran_chau_ha_long_healthy_viet_hung,
-    duration: '30 - 45 min',
+    // duration: '30 - 45 min',
     location: {
       latitude: 21.011115,
       longitude: 105.814101,
     },
     courier: {
+      id: 1,
       avatar: images.avatar_2,
       name: 'Trần Văn Hải',
+      phone: '0949014109',
     },
     menu: [
       {
@@ -125,14 +127,16 @@ export const restaurantData = [
       'Bãi Xe Nhà Họp Tổ Dân Phố Khu C2 Nghĩa Tân, P. Nghĩa Tân, Cầu Giấy, Hà Nội',
     categories: [1],
     photo: images.doi_sun_nuong_an_vat,
-    duration: '30 - 45 min',
+    // duration: '30 - 45 min',
     location: {
       latitude: 20.993363,
       longitude: 105.820664,
     },
     courier: {
+      id: 1,
       avatar: images.avatar_2,
       name: 'Nguyễn Hoàng Hải',
+      phone: '0988418141',
     },
     menu: [
       {
@@ -204,14 +208,16 @@ export const restaurantData = [
       'CT2 - G2A - 02 Hyundai Hillstate Hà Đông, Hà Trì, Hà Đông, Hà Nội',
     categories: [2],
     photo: images.com_hop_kimbap_han_quoc_ha_dong,
-    duration: '30 - 45 min',
+    // duration: '30 - 45 min',
     location: {
       latitude: 20.9940008,
       longitude: 105.7942165,
     },
     courier: {
+      id: 1,
       avatar: images.avatar_2,
       name: 'Lê Văn Hiếu',
+      phone: '0947717174',
     },
     menu: [
       {
@@ -282,14 +288,16 @@ export const restaurantData = [
     address: '23 Ngõ 203/62 H5 Kim Ngưu, P. Thanh Lương, Hai Bà Trưng, Hà Nội',
     categories: [2],
     photo: images.com_ga_hai_nam,
-    duration: '30 - 45 min',
+    // duration: '30 - 45 min',
     location: {
       latitude: 21.0186009,
       longitude: 105.7541057,
     },
     courier: {
+      id: 1,
       avatar: images.avatar_2,
       name: 'Lê Văn Hiếu',
+      phone: '0974874171',
     },
     menu: [
       {
@@ -344,14 +352,16 @@ export const restaurantData = [
     address: '2B Ngõ 44/21 Trần Thái Tông, P. Dịch Vọng Hậu, Cầu Giấy, Hà Nội',
     categories: [2],
     photo: images.com_ngon_100,
-    duration: '30 - 45 min',
+    // duration: '30 - 45 min',
     location: {
       latitude: 21.0135462,
       longitude: 105.8443165,
     },
     courier: {
+      id: 1,
       avatar: images.avatar_2,
       name: 'Lê Văn Hiếu',
+      phone: '0984117473',
     },
     menu: [
       {
@@ -426,14 +436,16 @@ export const restaurantData = [
     address: '20A Ngõ 125 Trương Định, P Trương Định, Hai Bà Trưng, Hà Nội',
     categories: [3],
     photo: images.banh_my_que_hai_phong,
-    duration: '30 - 45 min',
+    // duration: '30 - 45 min',
     location: {
       latitude: 21.0367325,
       longitude: 105.8440537,
     },
     courier: {
+      id: 1,
       avatar: images.avatar_2,
       name: 'Lê Văn Hiếu',
+      phone: '0976416418',
     },
     menu: [
       {
@@ -473,14 +485,16 @@ export const restaurantData = [
     address: '47 Đào Tấn, Ba Đình, P. Cống Vị, Ba Đình, Hà Nội',
     categories: [6],
     photo: images.sharetea,
-    duration: '30 - 45 min',
+    // duration: '30 - 45 min',
     location: {
       latitude: 21.0328332,
       longitude: 105.8049132,
     },
     courier: {
+      id: 1,
       avatar: images.avatar_2,
       name: 'Hoàng Hiểu Long',
+      phone: '0974661641',
     },
     menu: [
       {
@@ -534,14 +548,16 @@ export const restaurantData = [
     address: 'Sảnh G, Tòa Westa, 102 Trần Phú, P. Mộ Lao, Hà Đông, Hà Nội',
     categories: [6],
     photo: images.tra_sua_tran_phu,
-    duration: '30 - 45 min',
+    // duration: '30 - 45 min',
     location: {
       latitude: 21.0498188,
       longitude: 105.7090434,
     },
     courier: {
+      id: 1,
       avatar: images.avatar_2,
       name: 'Trần Văn Quân',
+      phone: '0977472621',
     },
     menu: [
       {
@@ -588,14 +604,16 @@ export const restaurantData = [
     address: '28 Hoàng Cầu, P. Ô Chợ Dừa, Đống Đa, Hà Nội',
     categories: [4],
     photo: images.bun_bo_hue,
-    duration: '30 - 45 min',
+    // duration: '30 - 45 min',
     location: {
       latitude: 21.0162826,
       longitude: 105.8218673,
     },
     courier: {
+      id: 1,
       avatar: images.avatar_2,
       name: 'Trần Văn Hiếu',
+      phone: '0966366222',
     },
     menu: [
       {

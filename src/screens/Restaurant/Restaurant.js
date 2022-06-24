@@ -13,6 +13,7 @@ const Restaurant = ({route, navigation}) => {
 
   const scrollX = new Animated.Value(0);
 
+  //Xử lý số lượng đặt hàng
   const handleOrderQuantity = (action, menuId, price) => {
     let orderList = orderItem.slice();
     let item = orderList.filter(a => a.menuId === menuId);

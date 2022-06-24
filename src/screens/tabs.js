@@ -9,13 +9,12 @@ import Svg, {Path} from 'react-native-svg';
 
 import Home from './Home/Home';
 import Search from './Search/Search';
-import Like from './Like/Like';
-import User from './Authentication/User';
-import SignInScreen from './Authentication/SignInScreen';
-import OrderScreen from '../screens/OrderDelivery/OrderScreen';
+import SignOutScreen from './Authentication/SignOutScreen';
 
 import {COLORS, icons} from '../constants';
 import AuthStack from './Authentication/authStack';
+import OrderDelivery from './OrderDelivery/OrderDelivery';
+import SignInScreen from './Authentication/SignInScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -107,8 +106,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="OrderScreen"
-        component={OrderScreen}
+        name="Order"
+        component={Home}
         options={{
           tabBarIcon: ({focused}) => (
             <Image
@@ -125,8 +124,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="User"
-        component={AuthStack}
+        name="SignOutScreen"
+        component={SignOutScreen}
         options={{
           tabBarIcon: ({focused}) => (
             <Image

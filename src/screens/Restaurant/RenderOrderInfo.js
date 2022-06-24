@@ -113,22 +113,7 @@ export const RenderOrderInfo = ({
               flexDirection: 'row',
               alignItems: 'center',
             }}>
-            <Image
-              source={icons.mastercard}
-              resizeMode="contain"
-              style={{
-                width: 20,
-                height: 20,
-                tintColor: COLORS.darkGray,
-              }}
-            />
-            <Text
-              style={{
-                marginLeft: SIZES.padding,
-                ...FONTS.h5,
-                fontWeight: '600',
-                color: COLORS.darkGray,
-              }}></Text>
+            <Text>Phú Diễn, Hà Nội, Việt Nam</Text>
           </View>
         </View>
         {/* Order button section */}

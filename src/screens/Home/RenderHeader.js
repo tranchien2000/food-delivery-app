@@ -14,9 +14,12 @@ import {Icon} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 import {COLORS, icons, FONTS, SIZES} from '../../constants';
 import {restaurantData} from '../../Data/data';
-import SearchHeader from '../Search/SearchHeader';
 
-export const RenderHeader = ({currentLocation, setCurrentLocation}) => {
+export const RenderHeader = ({
+  currentLocation,
+  setCurrentLocation,
+  navigation,
+}) => {
   return (
     <View
       style={{
@@ -54,23 +57,6 @@ export const RenderHeader = ({currentLocation, setCurrentLocation}) => {
             justifyContent: 'center',
             borderRadius: SIZES.radius,
           }}>
-          {/* <TouchableWithoutFeedback
-            onPress={() => {
-              setModalVisible(true);
-            }}>
-            <View style={styles.SearchArea}>
-              <Icon
-                name="search"
-                style={styles.searchIcon}
-                type="material"
-                iconStyle={{marginLeft: 5}}
-                size={32}
-              />
-              <Text style={{fontSize: 15}}>Bạn muốn tìm gì?</Text>
-            </View>
-          </TouchableWithoutFeedback> */}
-          {/* <SearchHeader /> */}
-
           <View
             style={{
               flex: 1,
@@ -79,32 +65,18 @@ export const RenderHeader = ({currentLocation, setCurrentLocation}) => {
             }}>
             <View
               style={{
-                width: '70%',
+                width: '100%',
                 height: '100%',
                 backgroundColor: COLORS.lightGray3,
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: SIZES.radius,
               }}>
-              <Text style={{...FONTS.h4}}>{currentLocation.streetName}</Text>
+              <Text style={{...FONTS.h4}}>{currentLocation.addressName}</Text>
             </View>
           </View>
         </View>
       </View>
-      <TouchableOpacity
-        style={{
-          width: 50,
-          paddingRight: SIZES.padding * 2,
-          justifyContent: 'center',
-        }}>
-        <Image
-          style={{
-            width: 30,
-            height: 30,
-          }}
-          source={icons.shoppingBasket}
-        />
-      </TouchableOpacity>
     </View>
   );
 };

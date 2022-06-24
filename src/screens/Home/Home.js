@@ -4,18 +4,12 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 import {COLORS} from '../../constants';
 import {RenderHeader} from './RenderHeader';
 import {RenderMainCategories} from './RenderMainCategories';
-import {
-  initialCurrentLocation,
-  restaurantData,
-  categoryData,
-} from '../../Data/data';
+import {CurrentLocation, restaurantData, categoryData} from '../../Data/data';
 
 import {RenderRestaurantList} from './RenderRestaurantList';
 
 const Home = ({navigation}) => {
-  const [currentLocation, setCurrentLocation] = React.useState(
-    initialCurrentLocation,
-  );
+  const [currentLocation, setCurrentLocation] = React.useState(CurrentLocation);
   const [categories, setCategories] = React.useState(categoryData);
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [restaurants, setRestaurants] = React.useState(restaurantData);

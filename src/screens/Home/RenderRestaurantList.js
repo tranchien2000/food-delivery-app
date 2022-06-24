@@ -31,25 +31,6 @@ export const RenderRestaurantList = ({
               borderRadius: SIZES.radius,
             }}
           />
-          <View
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              height: 50,
-              width: SIZES.width * 0.3,
-              backgroundColor: COLORS.white,
-              borderTopRightRadius: SIZES.radius,
-              borderBottomLeftRadius: SIZES.radius,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Text
-              style={{
-                ...FONTS.h4,
-              }}>
-              {item.duration}
-            </Text>
-          </View>
         </View>
 
         <Text
@@ -110,7 +91,7 @@ export const RenderRestaurantList = ({
                     marginBottom: 5,
                   }}>
                   {' '}
-                  .{' '}
+                  -{' '}
                 </Text>
               </View>
             ))}

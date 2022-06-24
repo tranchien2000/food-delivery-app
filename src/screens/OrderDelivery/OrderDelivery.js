@@ -2,10 +2,11 @@
 import React from 'react';
 import {View} from 'react-native';
 import {RenderMap} from './RenderMap';
+import Tabs from '../tabs';
 
 const OrderDelivery = ({route, navigation}) => {
   const [currRestaurant, setCurrRestaurant] = React.useState(null);
-  const [streetName, setStreetName] = React.useState('');
+  const [addressName, setAddressName] = React.useState('');
   const [source, setSource] = React.useState(null);
   const [destination, setDestination] = React.useState(null);
   const [region, setRegion] = React.useState(null);
@@ -14,7 +15,7 @@ const OrderDelivery = ({route, navigation}) => {
     let {restaurant, currentLocation} = route.params;
     let sourceLocation = currentLocation.gps;
     let destinationLocation = restaurant.location;
-    let street = currentLocation.streetName;
+    let street = currentLocation.addressName;
 
     let mapRegion = {
       latitude: (sourceLocation.latitude + destinationLocation.latitude) / 2,
@@ -26,7 +27,7 @@ const OrderDelivery = ({route, navigation}) => {
     };
 
     setCurrRestaurant(restaurant);
-    setStreetName(street);
+    setAddressName(street);
     setSource(sourceLocation);
     setDestination(destinationLocation);
     setRegion(mapRegion);
@@ -43,7 +44,7 @@ const OrderDelivery = ({route, navigation}) => {
         region={region}
         destinationLocation={destination}
         sourceLocation={source}
-        streetName={streetName}
+        addressName={addressName}
         handleSource={setSource}
         handleRegion={setRegion}
         restaurant={currRestaurant}

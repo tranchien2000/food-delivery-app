@@ -1,4 +1,4 @@
-import React, {useState, useRef, useContext} from 'react';
+import React, {useState, useRef, useContext, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   TextInput,
   Alert,
   Image,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import {SocialIcon, Button} from 'react-native-elements';
@@ -16,142 +17,104 @@ import {Formik} from 'formik';
 import {COLORS, FONTS, icons} from '../../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SignInContext} from './authContext';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {auth} from '../../../firebase';
+import {useNavigation} from '@react-navigation/native';
 
-export default function SignInScreen({navigation}) {
-  // const {dispatchSignedIn} = useContext(SignInContext);
+const SignInScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [textInput2Fossued, setTextInput2Fossued] = useState(false);
-  const textInpput1 = useRef(1);
-  const textInput2 = useRef(2);
+  const navigation = useNavigation();
 
-  async function signIn(data) {
-    try {
-      const {password, email} = data;
-      const user = await auth().signInWithEmailAndPassword(email, password);
+  useEffect(() => {
+    const unsubcribe = auth.onAuthStateChanged(user => {
       if (user) {
-        dispatchSignedIn({
-          type: 'UPDATE_SIGN_IN',
-          payload: {userToken: 'signed-in'},
-        });
+        navigation.replace('Home');
       }
-    } catch (error) {
-      Alert.alert(error.name, error.message);
-    }
-  }
+    });
+    return unsubcribe;
+  }, []);
+
+  const handleSignIn = () => {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        alert('Đăng nhập thành công', user.email);
+      })
+      .catch(error => alert(error.message));
+  };
 
   return (
-    <View style={styles.container}>
-      <View style={{marginTop: 20, alignItems: 'center'}}>
-        <Text
-          style={{color: COLORS.headerColor, fontSize: 30, fontWeight: 'bold'}}>
-          ĐĂNG NHẬP
-        </Text>
-      </View>
-      <Formik
-        initialValues={{email: '', password: ''}}
-        onSubmit={values => {
-          signIn(values);
-        }}>
-        {props => (
-          <View>
-            <View style={{marginTop: 20}}>
-              <View>
-                <TextInput
-                  style={styles.TextInput1}
-                  placeholder="Email"
-                  ref={textInpput1}
-                  onChangeText={props.handleChange('email')}
-                  value={props.values.email}
-                />
-              </View>
+    <KeyboardAvoidingView style={styles.container}>
+      <View>
+        <View style={{marginTop: 20, alignItems: 'center'}}>
+          <Text
+            style={{
+              color: COLORS.headerColor,
+              fontSize: 30,
+              fontWeight: 'bold',
+            }}>
+            ĐĂNG NHẬP
+          </Text>
+        </View>
 
-              <View style={styles.TextInput2}>
-                <Animatable.View>
-                  <Image source={icons.lock} style={{marginRight: 10}} />
-                </Animatable.View>
-                <TextInput
-                  style={{width: '80%', fontWeight: 'bold'}}
-                  placeholder="Password"
-                  onFocus={() => {
-                    setTextInput2Fossued(false);
-                  }}
-                  onBlur={() => {
-                    setTextInput2Fossued(true);
-                  }}
-                  onChangeText={props.handleChange('password')}
-                  value={props.values.password}
-                  secureTextEntry={true}
-                />
-                <Animatable.View>
-                  <Image
-                    source={icons.visibility_off}
-                    style={{marginRight: 10}}
-                  />
-                </Animatable.View>
-              </View>
-            </View>
-
-            <View style={{marginHorizontal: 20, marginVertical: 20}}>
-              <Button
-                title="ĐĂNG NHẬP"
-                buttonStyle={styles.styledButton}
-                titleStyle={styles.buttonTitle}
-                onPress={() => {
-                  navigation.navigate('Home');
-                }}
+        <View>
+          <View style={{marginTop: 20}}>
+            <View>
+              <TextInput
+                style={styles.TextInput1}
+                placeholder="Email"
+                value={email}
+                onChangeText={text => setEmail(text)}
               />
             </View>
+
+            <View style={styles.TextInput2}>
+              <Animatable.View>
+                <Image source={icons.lock} style={{marginRight: 10}} />
+              </Animatable.View>
+              <TextInput
+                style={{width: '80%', fontWeight: 'bold'}}
+                placeholder="Password"
+                value={password}
+                onChangeText={text => setPassword(text)}
+                secureTextEntry={true}
+              />
+              <Animatable.View>
+                <Image
+                  source={icons.visibility_off}
+                  style={{marginRight: 10}}
+                />
+              </Animatable.View>
+            </View>
           </View>
-        )}
-      </Formik>
 
-      <View style={{alignItems: 'center'}}>
-        <Text style={{...styles.text1, textDecorationLine: 'underline'}}>
-          Quên mật khẩu ?
-        </Text>
-      </View>
+          <View style={{marginHorizontal: 20, marginVertical: 20}}>
+            <TouchableOpacity
+              style={styles.styledButton}
+              onPress={handleSignIn}>
+              <Text style={styles.buttonTitle}>Đăng nhập</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
 
-      <View style={{alignItems: 'center', marginTop: 10, marginBottom: 10}}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Đăng nhập bằng</Text>
+        <View style={{marginHorizontal: 20}}>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => {
+              navigation.navigate('SignUpScreen');
+            }}>
+            <Text style={styles.ButtonTitle}>Đăng kí</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      {/* 
-      <View style={{marginHorizontal: 10, marginTop: 5}}>
-        <SocialIcon
-          title="Đăng nhập bằng Facebook"
-          button
-          type="facebook"
-          style={styles.SocialIcon}
-          onPress={() => {}}
-        />
-      </View>
-
-      <View style={{marginHorizontal: 10, marginTop: 5}}>
-        <SocialIcon
-          title="Đăng nhập bằng Google"
-          button
-          type="google"
-          style={styles.SocialIcon}
-          onPress={() => {}}
-        />
-      </View> */}
-
-      <View style={{marginTop: 10, marginLeft: 20}}>
-        <Text style={{...styles.text1}}>Đăng nhập lần đầu</Text>
-      </View>
-
-      <View style={{alignItems: 'flex-end', marginHorizontal: 20}}>
-        <Button
-          title="Đăng kí"
-          buttonStyle={styles.Button}
-          titleStyle={styles.ButtonTitle}
-          onPress={() => {
-            navigation.navigate('SignUpScreen');
-          }}
-        />
-      </View>
-    </View>
+    </KeyboardAvoidingView>
   );
-}
+};
+
+export default SignInScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -163,6 +126,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ff8c52',
     alignContent: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 12,
     borderWidth: 1,
     borderColor: '#ff8c52',
@@ -214,18 +178,19 @@ const styles = StyleSheet.create({
 
   Button: {
     backgroundColor: 'white',
+    alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
     borderRadius: 12,
     borderWidth: 1,
     borderColor: '#ff8c52',
-    height: 40,
+    height: 50,
     paddingHorizontal: 20,
   },
 
   ButtonTitle: {
     color: '#ff8c52',
-    fontSize: 16,
+    fontSize: 22,
     fontWeight: 'bold',
     alignItems: 'center',
     justifyContent: 'center',

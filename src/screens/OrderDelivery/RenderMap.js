@@ -6,7 +6,7 @@ import MapViewDirection from 'react-native-maps-directions';
 
 import {COLORS, GOOGLE_API_KEY, icons, FONTS, SIZES} from '../../constants';
 
-const RenderDestinationHeader = ({streetName, duration}) => {
+const RenderDestinationHeader = ({addressName, duration}) => {
   return (
     <View
       style={{
@@ -40,10 +40,10 @@ const RenderDestinationHeader = ({streetName, duration}) => {
           style={{
             flex: 1,
           }}>
-          <Text style={{...FONTS.body3}}>{streetName}</Text>
+          <Text style={{...FONTS.body3}}>{addressName}</Text>
         </View>
 
-        <Text style={{...FONTS.body3}}>{Math.ceil(duration)} mins</Text>
+        {/* <Text style={{...FONTS.body3}}>{Math.ceil(duration)} mins</Text> */}
       </View>
     </View>
   );
@@ -55,7 +55,7 @@ const RenderDeliveryInfo = ({restaurant, navigation}) => {
     <View
       style={{
         position: 'absolute',
-        bottom: 50,
+        bottom: 10,
         left: 0,
         right: 0,
         alignItems: 'center',
@@ -98,8 +98,14 @@ const RenderDeliveryInfo = ({restaurant, navigation}) => {
                 }}>
                 {restaurant?.courier.name}
               </Text>
+              <Text
+                style={{
+                  ...FONTS.h4,
+                }}>
+                {restaurant?.courier.phone}
+              </Text>
               <View style={{flexDirection: 'row'}}>
-                <Image
+                {/* <Image
                   source={icons.star}
                   style={{
                     width: 18,
@@ -110,11 +116,14 @@ const RenderDeliveryInfo = ({restaurant, navigation}) => {
                 />
                 <Text style={{...FONTS.body3, fontWeight: '600'}}>
                   {restaurant?.rating}
-                </Text>
+                </Text> */}
               </View>
             </View>
             <Text style={{color: COLORS.darkGray, ...FONTS.body4}}>
               {restaurant?.name}
+            </Text>
+            <Text style={{color: COLORS.darkGray, ...FONTS.body4}}>
+              {restaurant?.address}
             </Text>
           </View>
         </View>
@@ -125,7 +134,7 @@ const RenderDeliveryInfo = ({restaurant, navigation}) => {
             marginTop: SIZES.padding * 2,
             justifyContent: 'space-between',
           }}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
               height: 50,
               flex: 1,
@@ -135,9 +144,9 @@ const RenderDeliveryInfo = ({restaurant, navigation}) => {
               justifyContent: 'center',
               borderRadius: 10,
             }}
-            onPress={() => navigation.navigate('OrderScreen')}>
+            onPress={() => navigation.navigate('OrderDelivery')}>
             <Text style={{...FONTS.h4, color: COLORS.white}}>Đặt món</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={{
               height: 50,
@@ -199,7 +208,7 @@ export const RenderMap = ({
   region,
   destinationLocation,
   sourceLocation,
-  streetName,
+  addressName,
   restaurant,
   handleSource,
   handleRegion,
@@ -248,34 +257,13 @@ export const RenderMap = ({
   const destinationMarker = () => {
     return (
       <Marker coordinate={destinationLocation}>
-        <View
+        <Image
+          source={icons.xe_may}
           style={{
-            height: 40,
             width: 40,
-            borderRadius: 20,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: COLORS.white,
-          }}>
-          <View
-            style={{
-              height: 30,
-              width: 30,
-              borderRadius: 15,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: COLORS.primary,
-            }}>
-            <Image
-              source={icons.pin}
-              style={{
-                width: 20,
-                height: 20,
-                tintColor: COLORS.white,
-              }}
-            />
-          </View>
-        </View>
+            height: 40,
+          }}
+        />
       </Marker>
     );
   };
@@ -288,7 +276,7 @@ export const RenderMap = ({
         flat={true}
         rotation={angle}>
         <Image
-          source={icons.xe_may}
+          source={icons.redPin}
           style={{
             width: 40,
             height: 40,
@@ -347,7 +335,10 @@ export const RenderMap = ({
           {destinationMarker()}
           {carIcon()}
         </MapView>
-        <RenderDestinationHeader streetName={streetName} duration={duration} />
+        <RenderDestinationHeader
+          addressName={addressName}
+          duration={duration}
+        />
         <RenderDeliveryInfo restaurant={restaurant} navigation={navigation} />
         {renderButton(zoomIn, zoomOut)}
       </View>
