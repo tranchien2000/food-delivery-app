@@ -12,68 +12,13 @@ import {COLORS, FONTS, icons, SIZES} from '../../constants';
 import {restaurantData, categoryData, CurrentLocation} from '../../Data/data';
 import {RenderRestaurantList} from '../Home/RenderRestaurantList';
 import {RenderMainCategories} from '../Home/RenderMainCategories';
-// import {SearchList} from './SearchList';
-
-const SearchList = ({
-  restaurants,
-  getCategoryNameById,
-  navigation,
-  currentLocation,
-}) => {
-  const renderItem = ({item}) => {
-    return (
-      <TouchableOpacity
-        style={{
-          marginBottom: 10,
-          flexDirection: 'column',
-        }}
-        onPress={() =>
-          navigation.navigate('Restaurant', {
-            item,
-            currentLocation,
-          })
-        }>
-        <View style={{marginBottom: 5}}>
-          <Image
-            source={item.photo}
-            resizeMode="cover"
-            style={{
-              width: '100%',
-              height: 150,
-              borderRadius: SIZES.radius,
-            }}
-          />
-        </View>
-
-        <Text
-          style={{
-            ...FONTS.body2,
-            marginBottom: SIZES.padding,
-          }}>
-          {item.name}
-        </Text>
-      </TouchableOpacity>
-    );
-  };
-  return (
-    <FlatList
-      data={restaurants}
-      keyExtractor={item => `${item.id}`}
-      renderItem={renderItem}
-      contentContainerStyle={{
-        paddingHorizontal: SIZES.padding * 2,
-        paddingBottom: 30,
-      }}
-    />
-  );
-};
+import {SearchList} from './SearchList';
 
 const Search = ({navigation}) => {
   const [currentLocation, setCurrentLocation] = React.useState(CurrentLocation);
   const [categories, setCategories] = React.useState(categoryData);
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [restaurants, setRestaurants] = React.useState(restaurantData);
-  const [data, setData] = React.useState(restaurantData);
 
   const onSelectCategory = category => {
     // filter restaurant list

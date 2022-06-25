@@ -6,12 +6,12 @@ import MapViewDirection from 'react-native-maps-directions';
 
 import {COLORS, GOOGLE_API_KEY, icons, FONTS, SIZES} from '../../constants';
 
-const RenderDestinationHeader = ({addressName, duration}) => {
+const RenderDestinationHeader = ({addressName, duration, phone, name}) => {
   return (
     <View
       style={{
         position: 'absolute',
-        top: 5,
+        top: 20,
         left: 0,
         right: 0,
         height: 50,
@@ -41,6 +41,8 @@ const RenderDestinationHeader = ({addressName, duration}) => {
             flex: 1,
           }}>
           <Text style={{...FONTS.body3}}>{addressName}</Text>
+          <Text style={{...FONTS.body3}}>{name}</Text>
+          <Text style={{...FONTS.body3}}>{phone}</Text>
         </View>
 
         {/* <Text style={{...FONTS.body3}}>{Math.ceil(duration)} mins</Text> */}
@@ -96,35 +98,17 @@ const RenderDeliveryInfo = ({restaurant, navigation}) => {
                 style={{
                   ...FONTS.h4,
                 }}>
-                {restaurant?.courier.name}
+                {restaurant?.courier.name} - {restaurant?.courier.phone}
               </Text>
-              <Text
-                style={{
-                  ...FONTS.h4,
-                }}>
-                {restaurant?.courier.phone}
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-                {/* <Image
-                  source={icons.star}
-                  style={{
-                    width: 18,
-                    height: 18,
-                    tintColor: COLORS.primary,
-                    marginRight: SIZES.padding,
-                  }}
-                />
-                <Text style={{...FONTS.body3, fontWeight: '600'}}>
-                  {restaurant?.rating}
-                </Text> */}
-              </View>
+
+              <View style={{flexDirection: 'row'}}></View>
             </View>
             <Text style={{color: COLORS.darkGray, ...FONTS.body4}}>
               {restaurant?.name}
             </Text>
-            <Text style={{color: COLORS.darkGray, ...FONTS.body4}}>
+            {/* <Text style={{color: COLORS.darkGray, ...FONTS.body4}}>
               {restaurant?.address}
-            </Text>
+            </Text> */}
           </View>
         </View>
 
@@ -134,7 +118,7 @@ const RenderDeliveryInfo = ({restaurant, navigation}) => {
             marginTop: SIZES.padding * 2,
             justifyContent: 'space-between',
           }}>
-          {/* <TouchableOpacity
+          <TouchableOpacity
             style={{
               height: 50,
               flex: 1,
@@ -144,9 +128,9 @@ const RenderDeliveryInfo = ({restaurant, navigation}) => {
               justifyContent: 'center',
               borderRadius: 10,
             }}
-            onPress={() => navigation.navigate('OrderDelivery')}>
+            onPress={() => navigation.navigate('OrderScreen')}>
             <Text style={{...FONTS.h4, color: COLORS.white}}>Đặt món</Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
           <TouchableOpacity
             style={{
               height: 50,
@@ -209,6 +193,8 @@ export const RenderMap = ({
   destinationLocation,
   sourceLocation,
   addressName,
+  phone,
+  name,
   restaurant,
   handleSource,
   handleRegion,
@@ -337,7 +323,8 @@ export const RenderMap = ({
         </MapView>
         <RenderDestinationHeader
           addressName={addressName}
-          duration={duration}
+          name={name}
+          phone={phone}
         />
         <RenderDeliveryInfo restaurant={restaurant} navigation={navigation} />
         {renderButton(zoomIn, zoomOut)}

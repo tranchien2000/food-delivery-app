@@ -13,7 +13,7 @@ import SignOutScreen from './Authentication/SignOutScreen';
 
 import {COLORS, icons} from '../constants';
 import AuthStack from './Authentication/authStack';
-import OrderDelivery from './OrderDelivery/OrderDelivery';
+import OrderScreen from './OrderDelivery/OrderScreen';
 import SignInScreen from './Authentication/SignInScreen';
 
 const Tab = createBottomTabNavigator();
@@ -106,8 +106,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Order"
-        component={Home}
+        name="OrderScreen"
+        component={OrderScreen}
         options={{
           tabBarIcon: ({focused}) => (
             <Image

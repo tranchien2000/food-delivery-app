@@ -7,6 +7,8 @@ import Tabs from '../tabs';
 const OrderDelivery = ({route, navigation}) => {
   const [currRestaurant, setCurrRestaurant] = React.useState(null);
   const [addressName, setAddressName] = React.useState('');
+  const [phone, setPhone] = React.useState('');
+  const [name, setName] = React.useState('');
   const [source, setSource] = React.useState(null);
   const [destination, setDestination] = React.useState(null);
   const [region, setRegion] = React.useState(null);
@@ -16,6 +18,8 @@ const OrderDelivery = ({route, navigation}) => {
     let sourceLocation = currentLocation.gps;
     let destinationLocation = restaurant.location;
     let street = currentLocation.addressName;
+    let phone = currentLocation.phone;
+    let name = currentLocation.name;
 
     let mapRegion = {
       latitude: (sourceLocation.latitude + destinationLocation.latitude) / 2,
@@ -28,6 +32,8 @@ const OrderDelivery = ({route, navigation}) => {
 
     setCurrRestaurant(restaurant);
     setAddressName(street);
+    setName(name);
+    setPhone(phone);
     setSource(sourceLocation);
     setDestination(destinationLocation);
     setRegion(mapRegion);
@@ -45,6 +51,8 @@ const OrderDelivery = ({route, navigation}) => {
         destinationLocation={destination}
         sourceLocation={source}
         addressName={addressName}
+        name={name}
+        phone={phone}
         handleSource={setSource}
         handleRegion={setRegion}
         restaurant={currRestaurant}

@@ -3,6 +3,8 @@ import {icons, images} from '../constants';
 // Dummy data
 export const CurrentLocation = {
   addressName: 'Phú Diễn, Hà Nội, Việt Nam',
+  phone: '0942140754',
+  name: 'Trần Thanh Hải',
   gps: {
     latitude: 21.0533134,
     longitude: 105.7632937,
