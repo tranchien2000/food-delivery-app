@@ -14,11 +14,16 @@ import {RenderRestaurantList} from '../Home/RenderRestaurantList';
 import {RenderMainCategories} from '../Home/RenderMainCategories';
 import {SearchList} from './SearchList';
 
+import filter from 'lodash.filter';
+
 const Search = ({navigation}) => {
   const [currentLocation, setCurrentLocation] = React.useState(CurrentLocation);
   const [categories, setCategories] = React.useState(categoryData);
   const [selectedCategory, setSelectedCategory] = React.useState(null);
+
   const [restaurants, setRestaurants] = React.useState(restaurantData);
+
+  const [fulldata, setFullData] = React.useState(restaurantData);
 
   const onSelectCategory = category => {
     // filter restaurant list
@@ -28,13 +33,23 @@ const Search = ({navigation}) => {
     setRestaurants(restaurantList);
     setSelectedCategory(category);
   };
-
   const searchName = input => {
-    let data = restaurantData;
-    let searchData = restaurantData.filter(item => {
-      return item.name.toLowerCase().includes(input.toLowerCase());
+    //console.log(input);
+    let queryformat = input;
+    let searchData = filter(fulldata, objitem => {
+      //console.log(item);
+      return contain(objitem, queryformat);
     });
-    setData(searchData);
+    setRestaurants(searchData);
+  };
+
+  const contain = (objitem, text) => {
+    console.log(objitem.name);
+    console.log(text);
+    if (objitem.name.includes(text)) {
+      return true;
+    }
+    return false;
   };
 
   const getCategoryNameById = categoryId => {

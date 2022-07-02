@@ -62,7 +62,7 @@ export const RenderFoodInfo = ({
                   borderBottomLeftRadius: 25,
                 }}
                 onPress={() =>
-                  handleOrderQuantity('-', item.menuId, item.price)
+                  handleOrderQuantity('-', item.menuId, item.price, item.name)
                 }>
                 <Text style={{...FONTS.body1}}> - </Text>
               </TouchableOpacity>
@@ -89,7 +89,7 @@ export const RenderFoodInfo = ({
                   borderBottomRightRadius: 25,
                 }}
                 onPress={() =>
-                  handleOrderQuantity('+', item.menuId, item.price)
+                  handleOrderQuantity('+', item.menuId, item.price, item.name)
                 }>
                 <Text style={{...FONTS.body2, marginBottom: 3}}> + </Text>
               </TouchableOpacity>

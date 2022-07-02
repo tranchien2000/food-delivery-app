@@ -1,7 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
+import {set} from 'lodash';
 import React from 'react';
-import {View, Animated, Text, Image, TouchableOpacity} from 'react-native';
-
+import {
+  View,
+  Animated,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+// import {Button, Card, Layout, Modal, Text} from '@ui-kitten/components';
 import {SIZES, COLORS, FONTS, icons} from '../../constants';
 
 export const RenderOrderInfo = ({
@@ -11,8 +19,25 @@ export const RenderOrderInfo = ({
   handleBasketItemPrice,
   navigation,
   currentLocation,
+  orderItem,
 }) => {
+  const [listitem, setListItem] = React.useState(orderItem);
   const dotPosition = Animated.divide(scrollX, SIZES.width);
+
+  function handleAdd(count, price) {
+    //const item = JSON.parse(orderItem);
+    //console.log(orderItem);
+
+    const data = [
+      {
+        OrderItem: orderItem,
+        Price: price,
+      },
+    ];
+    setListItem(data);
+    //console.log(orderItem);
+  }
+
   return (
     <View>
       {/* Dots */}
@@ -136,6 +161,7 @@ export const RenderOrderInfo = ({
                 ? navigation.navigate('OrderDelivery', {
                     restaurant,
                     currentLocation,
+                    orderItem,
                   })
                 : null
             }>
@@ -146,3 +172,8 @@ export const RenderOrderInfo = ({
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    minHeight: 192,
+  },
+});

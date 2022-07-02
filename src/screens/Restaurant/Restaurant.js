@@ -14,7 +14,7 @@ const Restaurant = ({route, navigation}) => {
   const scrollX = new Animated.Value(0);
 
   //Xử lý số lượng đặt hàng
-  const handleOrderQuantity = (action, menuId, price) => {
+  const handleOrderQuantity = (action, menuId, price, name) => {
     let orderList = orderItem.slice();
     let item = orderList.filter(a => a.menuId === menuId);
     if (action === '+') {
@@ -25,12 +25,14 @@ const Restaurant = ({route, navigation}) => {
       } else {
         const newItem = {
           menuId: menuId,
+          name: name,
           qty: 1,
           price: price,
           total: price,
         };
         orderList.push(newItem);
       }
+
       setOrderItem(orderList);
     } else {
       if (item.length > 0) {
@@ -89,6 +91,7 @@ const Restaurant = ({route, navigation}) => {
       <RenderOrderInfo
         restaurant={restaurant}
         scrollX={scrollX}
+        orderItem={orderItem}
         handleBasketItemCount={handleBasketItemCount}
         handleBasketItemPrice={handleBasketItemPrice}
         navigation={navigation}

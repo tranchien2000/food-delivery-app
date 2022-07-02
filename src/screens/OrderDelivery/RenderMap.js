@@ -51,8 +51,10 @@ const RenderDestinationHeader = ({addressName, duration, phone, name}) => {
   );
 };
 
-const RenderDeliveryInfo = ({restaurant, navigation}) => {
-  console.log('avatar', restaurant);
+const RenderDeliveryInfo = ({restaurant, navigation, orderItem}) => {
+  //console.log('avatar', restaurant);
+  //console.log(orderItem);
+  //console.log(orderItem);
   return (
     <View
       style={{
@@ -128,8 +130,14 @@ const RenderDeliveryInfo = ({restaurant, navigation}) => {
               justifyContent: 'center',
               borderRadius: 10,
             }}
-            onPress={() => navigation.navigate('OrderScreen')}>
-            <Text style={{...FONTS.h4, color: COLORS.white}}>Đặt món</Text>
+            onPress={() =>
+              navigation.navigate('OrderScreen', {
+                orderItem,
+              })
+            }>
+            <Text style={{...FONTS.h4, color: COLORS.white}}>
+              Chi tiết đơn hàng
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -199,13 +207,14 @@ export const RenderMap = ({
   handleSource,
   handleRegion,
   navigation,
+  orderItem,
 }) => {
   const mapView = React.useRef();
   const [duration, setDuration] = React.useState(0);
   const [isReady, setIsReady] = React.useState(false);
   const [angle, setAngle] = React.useState(0);
 
-  console.log('[RESTAURANT]: ', restaurant);
+  //console.log('[RESTAURANT]: ', restaurant);
 
   const zoomIn = () => {
     let newRegion = {
@@ -326,7 +335,11 @@ export const RenderMap = ({
           name={name}
           phone={phone}
         />
-        <RenderDeliveryInfo restaurant={restaurant} navigation={navigation} />
+        <RenderDeliveryInfo
+          restaurant={restaurant}
+          navigation={navigation}
+          orderItem={orderItem}
+        />
         {renderButton(zoomIn, zoomOut)}
       </View>
     );

@@ -12,7 +12,8 @@ const OrderDelivery = ({route, navigation}) => {
   const [source, setSource] = React.useState(null);
   const [destination, setDestination] = React.useState(null);
   const [region, setRegion] = React.useState(null);
-
+  const {orderItem} = route.params;
+  console.log(orderItem);
   React.useEffect(() => {
     let {restaurant, currentLocation} = route.params;
     let sourceLocation = currentLocation.gps;
@@ -47,6 +48,7 @@ const OrderDelivery = ({route, navigation}) => {
       <RenderMap
         route={route}
         navigation={navigation}
+        orderItem={orderItem}
         region={region}
         destinationLocation={destination}
         sourceLocation={source}

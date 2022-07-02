@@ -6,11 +6,14 @@ import {Restaurant, OrderDelivery, Home, AuthStack} from './src/screens';
 import Tabs from './src/screens/tabs';
 import OrderScreen from './src/screens/OrderDelivery/OrderScreen';
 // import {rootNavigation} from './src/screens/Authentication/rootNavigation';
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
+    <ApplicationProvider {...eva} theme={eva.light}>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
@@ -21,6 +24,7 @@ const App = () => {
         <Stack.Screen name="OrderDelivery" component={OrderDelivery} />
       </Stack.Navigator>
     </NavigationContainer>
+    </ApplicationProvider>
   );
 };
 

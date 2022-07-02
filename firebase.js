@@ -23,12 +23,13 @@ const firebaseConfig = {
 
 let app;
 if (firebase.apps.length === 0) {
-  app = firebase.initializeApp(firebaseConfig);
+  app = firebase.initializeApp(firebaseConfig).firestore();
 } else {
-  app = firebase.app();
+  app = firebase.app().firestore();
 }
 
 // const app = initializeApp(firebaseConfig);
 // export const auth = getAuth(app);
 const auth = firebase.auth();
+
 export {auth};
